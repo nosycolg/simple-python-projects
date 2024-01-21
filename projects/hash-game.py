@@ -69,56 +69,59 @@ def VerifyWin():
     for s in symbles:
         win = False
         # verify lines
-        il = ic = 0
-        while il < 3:
-            soma = 0
-            ic = 0
-            while ic < 3:
-                if hash[il][ic] == True:
-                    soma += 1
-                ic += 1
-            if soma == 3:
-                win = True
+        lines = 0
+        columns = 0
+        while lines < 3:
+            sum = 0
+            columns = 0
+            while columns < 3:
+                if hash[lines][columns] == s:
+                    sum += 1
+                columns += 1
+                print(hash[0][0])
+            if sum == 3:
+                win = s
                 break
-            il += 1
-        if win != False:
-            break
+            lines += 1
+            if win != False:
+                break
         # verify columns
-        il = ic = 0
-        while ic < 3:
-            soma = 0
-            il = 0
-            while il < 3:
-                if hash[il][ic] == True:
-                    soma += 1
-                il += 1
-            if soma == 3:
-                win = True
+        lines = 0
+        columns = 0
+        while columns < 3:
+            sum = 0
+            lines = 0
+            while lines < 3:
+                if hash[lines][columns] == s:
+                    sum += 1
+                lines += 1
+            if sum == 3:
+                win = s
                 break
-            ic += 1
+            columns += 1
         if win != False:
             break
         # verify diagonal
-        soma = 0
+        sum = 0
         idiag = 0
         while idiag < 3:
-            if hash[idiag][idiag] == True:
-                soma += 1
+            if hash[idiag][idiag] == s:
+                sum += 1
             idiag += 1
-        if soma == 3:
-            win = True
+        if sum == 3:
+            win = s
             break
         # verify diagonal
-        soma = 0
+        sum = 0
         idiagl = 0
         idiagc = 2
         while idiagc >= 0:
-            if hash[idiagl][idiagc] == True:
-                soma += 1
+            if hash[idiagl][idiagc] == s:
+                sum += 1
             idiagl += 1
             idiagc -= 1
-        if soma == 3:
-            win = True
+        if sum == 3:
+            win = s
             break
     return win
 
@@ -129,12 +132,10 @@ while True:
     CPUPlay()
     Screen()
     whoWin = VerifyWin()
-    print(whoWin)
     if whoWin != False or plays >= maxPlays:
+        print(Fore.RED + "FIM DE JOGO" + Fore.YELLOW)
+        if whoWin == "X" or whoWin == "O":
+            print("Resultado: Jogador " + whoWin + " venceu")
+        else:
+            print("Resultado: Empate")
         break
-    
-    print(Fore.RED + "FIM DE JOGO" + Fore.YELLOW)
-    if (whoWin=="X" or whoWin=="O"):
-        print('Resultado: Jogador ' + whoWin + " venceu")
-    else:
-        print('Resultado: Empate')
